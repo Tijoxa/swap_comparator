@@ -34,7 +34,7 @@ ETHERSCAN_MAINNET_ADDRESS = {
 
 
 class AmountCategory:
-    StableCoin = [100, 1000, 10000, 100000, 1000000]
+    stable_coin = [100, 1000, 10000, 100000, 1000000]
     WETH = [0.01, 0.1, 1, 10, 100, 1000, 10000]
     WBTC = [0.01, 0.1, 1, 10, 100, 1000, 10000]
 

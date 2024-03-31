@@ -1,12 +1,13 @@
+import asyncio
 import csv
 import os
-import time
+import datetime
 
 
-def write_on_timestamp(path: str, data: dict):
+def write_on_timestamp(path: str, data: list[dict]):
     file_exists = os.path.isfile(path)
 
-    with open(path, "w") as csvfile:
+    with open(path, "a") as csvfile:
         # "timestamp",
         # "chain",
         # "token_in",
@@ -16,6 +17,7 @@ def write_on_timestamp(path: str, data: dict):
         # "amount_in",
         # "amount_out",
         headers = [
+            "timestamp",
             "fromToken",
             "toToken",
             "chainId",
@@ -28,12 +30,24 @@ def write_on_timestamp(path: str, data: dict):
         if not file_exists:
             writer.writeheader()
 
-        writer.writerow(data)
+        for row in data:
+            writer.writerow(row)
 
 
-def main():
-    write_on_timestamp(os.path.join("data", "timestamp.csv"), {})
+async def run_each_hour():
+    current_datetime = datetime.datetime.now()
+    datetime_up_to_hour = current_datetime.replace(minute=0, second=0, microsecond=0)
+    data = [{"timestamp": datetime_up_to_hour}]
+
+    # TODO: add tasks for each platform (1inch, 0x, odos, ...)
+    await asyncio.gather()
+
+    write_on_timestamp(os.path.join("data", "timestamp.csv"), data)
+
+
+async def main():
+    run_each_hour()
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
