@@ -10,8 +10,6 @@ In this context, we want to have trustful source on data that compares quotes be
 
 Build a table that could be requested from the Jumper team that has 7 columns:
 
-*timestamp, chain,  token_in, token_out, pair_metadata, platform, amount_in, quote(=amount_out)*
-
 - **Pairs:**
 
 |             | Stablecoin                            | Main Tokens                  | Alternative Tokens |     |
