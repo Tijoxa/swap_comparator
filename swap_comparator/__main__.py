@@ -32,7 +32,7 @@ def write_on_timestamp(path: str, data: dict):
 
 
 def main():
-    pass
+    write_on_timestamp(os.path.join("data", "timestamp.csv"), {})
 
 
 if __name__ == "__main__":
