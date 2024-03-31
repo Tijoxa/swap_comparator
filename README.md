@@ -35,7 +35,7 @@ Hour
 
 - **Output file:**
 
-fromToken, toToken, ChainId, GasCost amount (when available), amountIn, amountOut**
+Timestamp, fromToken, toToken, ChainId, GasCost amount (when available), amountIn, amountOut
 
 ## **Resources**
 
