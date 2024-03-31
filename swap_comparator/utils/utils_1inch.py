@@ -1,6 +1,6 @@
 import requests
 
-from constant import MainnetAddress, ID1inch
+from swap_comparator.utils.constant import ID1inch
 
 
 def get_1inch_price(
@@ -21,11 +21,3 @@ def get_1inch_price(
     response = requests.get(apiUrl, headers=headers, params=params)
 
     return response.json()
-
-
-if __name__ == "__main__":
-    get_1inch_price(
-        token_in=MainnetAddress.WETH,
-        token_out=MainnetAddress.WBTC,
-        amount_in=1e18,
-    )
