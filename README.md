@@ -1,4 +1,4 @@
-# swap_comparator
+## swap_comparator
 
 # Purpose
 
@@ -40,7 +40,7 @@ https://chainlist.org/
 Ethereum: https://etherscan.io/
 Arbitrum: https://arbiscan.io/
 
-**More important:**
+# More important
 
 **Odos API:
 API endpoint** https://docs.odos.xyz/api/endpoints/ 
