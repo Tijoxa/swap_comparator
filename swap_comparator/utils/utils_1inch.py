@@ -2,33 +2,55 @@ import aiohttp
 import asyncio
 import datetime
 
-from swap_comparator.utils.constant import ID1inch, ARBISCAN_MAINNET_ADDRESS, AmountCategory
+from swap_comparator.utils.constant import ID1inch, ARBISCAN_MAINNET_ADDRESS, AmountCategory, MainnetAddress
 
 
 async def run_1inch(data: list[dict], timestamp: datetime.datetime):
+    tasks = []
+
     for amount_stable_coin in AmountCategory.stable_coin:
-        to_add = await get_1inch_price(
-            token_in=ARBISCAN_MAINNET_ADDRESS["USDC"],
-            token_out=ARBISCAN_MAINNET_ADDRESS["USDT"],
-            amount_in=amount_stable_coin,
+        tasks.append(
+            update_data(
+                data,
+                timestamp,
+                ARBISCAN_MAINNET_ADDRESS["USDC"],
+                ARBISCAN_MAINNET_ADDRESS["USDT"],
+                amount_stable_coin,
+            )
         )
-        elem = {
-            "timestamp": timestamp,
-            "platform": "1inch",
-            "fromToken": "USDC",
-            "toToken": "USDT",
-            "chainId": "",
-            "gasCost": "",
-            "amountIn": amount_stable_coin,
-            "amountOut": to_add["toTokenAmount"],
-        }
-        data.append(elem)
 
     for amount_WETH in AmountCategory.WETH:
-        pass
+        tasks.append(update_data(data, timestamp, amount_WETH))
 
     for amount_WBTC in AmountCategory.WBTC:
-        pass
+        tasks.append(update_data(data, timestamp, amount_WBTC))
+
+    await asyncio.gather(*tasks)
+
+
+async def update_data(
+    data: list[dict],
+    timestamp: datetime.datetime,
+    token_in: MainnetAddress,
+    token_out: MainnetAddress,
+    amount_stable_coin: float,
+):
+    to_add = await get_1inch_price(
+        token_in=token_in,
+        token_out=token_out,
+        amount_in=amount_stable_coin,
+    )
+    elem = {
+        "timestamp": timestamp,
+        "platform": "1inch",
+        "fromToken": token_in,  # TODO: serialize
+        "toToken": token_out,  # TODO: serialize
+        "chainId": "",
+        "gasCost": "",
+        "amountIn": amount_stable_coin,
+        "amountOut": to_add["toTokenAmount"],
+    }
+    data.append(elem)
 
 
 async def get_1inch_price(

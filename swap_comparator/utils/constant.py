@@ -13,6 +13,7 @@ class MainnetAddress:
     decimals: int
 
 
+# TODO: refactor
 ARBISCAN_MAINNET_ADDRESS = {
     "WETH": MainnetAddress("0x82aF49447D8a07e3bd95BD0d56f35241523fBab1", 18),
     "WBTC": MainnetAddress("0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f", 8),

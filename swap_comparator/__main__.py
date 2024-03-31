@@ -3,6 +3,8 @@ import csv
 import os
 import datetime
 
+from swap_comparator.utils.utils_1inch import run_1inch
+
 
 def write_on_timestamp(path: str, data: list[dict], timestamp: datetime.datetime):
     file_exists = os.path.isfile(path)
@@ -39,8 +41,9 @@ async def run_each_hour():
     datetime_up_to_hour = current_datetime.replace(minute=0, second=0, microsecond=0)
     data = []
 
-    # TODO: add tasks for each platform (1inch, 0x, odos, ...)
-    await asyncio.gather()
+    await asyncio.gather(
+        run_1inch(data, datetime_up_to_hour),
+    )
 
     write_on_timestamp(os.path.join("data", "timestamp.csv"), data)
 
