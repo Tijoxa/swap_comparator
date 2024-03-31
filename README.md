@@ -14,22 +14,22 @@ Build a table that could be requested from the Jumper team that has 7 columns:
 
 - **Pairs:**
 
-|  | Stablecoin | Main Tokens | Alternative Tokens |  |
-| --- | --- | --- | --- | --- |
-| Ethereum | USDC - USDT
-USDC - DAI | WETH-WBTC , WETH - USDC, WETH - USDT,  | WETH - WSTETH ,  WETH - MKR, 
-WETH - PEPE |  |
-| Arbitrum | USDC - USDT | WETH - USDC, WETH - USDT,  | WETH - ARB |  |
+|             | Stablecoin                            | Main Tokens                  | Alternative Tokens |     |
+| ----------- | ------------------------------------- | ---------------------------- | ------------------ | --- |
+| Ethereum    | USDC - USDT                           |
+| USDC - DAI  | WETH-WBTC , WETH - USDC, WETH - USDT, | WETH - WSTETH ,  WETH - MKR, |
+| WETH - PEPE |                                       |
+| Arbitrum    | USDC - USDT                           | WETH - USDC, WETH - USDT,    | WETH - ARB         |     |
 
 
-- **Timestamp frequency:** 
+- **Timestamp frequency:**
 
 Hour
 
 - **Amount category:**
 
-|  | Stablecoin | WETH | WBTC |
-| --- | --- | --- | --- |
+|      | Stablecoin                            | WETH                                    | WBTC                             |
+| ---- | ------------------------------------- | --------------------------------------- | -------------------------------- |
 | Size | 100 / 1000 / 10000 / 100000 / 1000000 | 0.1 / 0.1 / 1 / 10 / 100 / 1000 / 10000 | 0.01 / 0.1 / 1 / 10 / 100 / 1000 |
 
 
@@ -48,15 +48,15 @@ Arbitrum: https://arbiscan.io/
 
 # API PLATFORMS LIST - PRIORITY 1
 
-- ** Odos API:**
-API endpoint: https://docs.odos.xyz/api/endpoints/ 
+- **Odos API**
+API endpoint: https://docs.odos.xyz/api/endpoints/
 /sor/quote/v2
 
-- **1inch API** :
+- **1inch API**
 Create an account → https://portal.1inch.dev/dashboard
 API endpoint → https://portal.1inch.dev/documentation/swap/swagger?method=get&path=%2Fv6.0%2F1%2Fquote
 
-- **0x Swap API:**
+- **0x Swap API**
 Create an account → https://dashboard.0x.org/apps
 API endpoint: https://0x.org/docs/0x-swap-api/api-references/get-swap-v1-price
 
@@ -66,5 +66,5 @@ API endpoint: https://apidocs.li.fi/reference/get_quote (keep the sameChain Id f
 
 # API LIST - PRIORITY 2
 
-- **Paraswap API**: 
+- **Paraswap API**
 API endpoint: https://app.swaggerhub.com/apis/paraswapv5/api/1.0#/prices/get_prices
