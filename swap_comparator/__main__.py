@@ -4,7 +4,7 @@ import os
 import datetime
 
 
-def write_on_timestamp(path: str, data: list[dict]):
+def write_on_timestamp(path: str, data: list[dict], timestamp: datetime.datetime):
     file_exists = os.path.isfile(path)
 
     with open(path, "a") as csvfile:
@@ -37,7 +37,7 @@ def write_on_timestamp(path: str, data: list[dict]):
 async def run_each_hour():
     current_datetime = datetime.datetime.now()
     datetime_up_to_hour = current_datetime.replace(minute=0, second=0, microsecond=0)
-    data = [{"timestamp": datetime_up_to_hour}]
+    data = []
 
     # TODO: add tasks for each platform (1inch, 0x, odos, ...)
     await asyncio.gather()

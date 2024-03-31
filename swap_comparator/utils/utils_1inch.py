@@ -1,18 +1,28 @@
 import aiohttp
 import asyncio
+import datetime
 
 from swap_comparator.utils.constant import ID1inch, ARBISCAN_MAINNET_ADDRESS, AmountCategory
 
 
-async def run_1inch(data: list[dict]):
+async def run_1inch(data: list[dict], timestamp: datetime.datetime):
     for amount_stable_coin in AmountCategory.stable_coin:
         to_add = await get_1inch_price(
             token_in=ARBISCAN_MAINNET_ADDRESS["USDC"],
             token_out=ARBISCAN_MAINNET_ADDRESS["USDT"],
             amount_in=amount_stable_coin,
         )
-        # TODO: modify to fit expected keys
-        data.append(to_add)
+        elem = {
+            "timestamp": timestamp,
+            "platform": "1inch",
+            "fromToken": "USDC",
+            "toToken": "USDT",
+            "chainId": "",
+            "gasCost": "",
+            "amountIn": amount_stable_coin,
+            "amountOut": to_add["toTokenAmount"],
+        }
+        data.append(elem)
 
     for amount_WETH in AmountCategory.WETH:
         pass
