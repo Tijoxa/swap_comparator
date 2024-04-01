@@ -18,4 +18,4 @@ def test_1inch_API():
 
     response = requests.get(apiUrl, headers=headers, params=params)
 
-    assert response.status_code == 200
+    assert response.status_code == 200, f"Error in Response: {response.text}"
