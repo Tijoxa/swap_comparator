@@ -29,7 +29,12 @@ async def run_1inch(data: list[dict], timestamp: datetime.datetime):
     for amount_WBTC in AmountCategory.WBTC:
         pass
 
-    await asyncio.gather(*tasks)
+    scheduled_tasks = []
+    for task in tasks:
+        scheduled_tasks.append(task)
+        scheduled_tasks.append(asyncio.sleep(1))
+
+    await asyncio.gather(*scheduled_tasks)
 
 
 async def update_data(
@@ -45,17 +50,21 @@ async def update_data(
         token_out=token_out,
         amount_in=amount_stable_coin,
     )
-    elem = {
-        "timestamp": timestamp,
-        "platform": "1inch",
-        "chainId": chain.ID,
-        "fromToken": token_in.symbol,
-        "toToken": token_out.symbol,
-        "gasCost": "",
-        "amountIn": amount_stable_coin,
-        "amountOut": to_add,
-    }
-    data.append(elem)
+    try:
+        amountOut = to_add["dstAmount"]
+        elem = {
+            "timestamp": timestamp,
+            "platform": "1inch",
+            "chainId": chain.ID,
+            "fromToken": token_in.symbol,
+            "toToken": token_out.symbol,
+            "gasCost": "",
+            "amountIn": amount_stable_coin,
+            "amountOut": amountOut,
+        }
+        data.append(elem)
+    except KeyError:
+        print(f"KeyError on response {to_add}")
 
 
 async def get_1inch_price(
@@ -72,11 +81,11 @@ async def get_1inch_price(
         "dst": token_out.token_address,
         "amount": amount_in,
     }
-    return None
 
     async with aiohttp.ClientSession() as session:
         try:
             async with session.get(api_url, headers=headers, params=params) as response:
-                return await response.json()
+                print(response)
+                return await response.json(content_type=None)
         except asyncio.TimeoutError:
             print(f"Timeout error occurred while fetching {api_url}")
