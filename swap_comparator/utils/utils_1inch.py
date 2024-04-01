@@ -29,12 +29,9 @@ async def run_1inch(data: list[dict], timestamp: datetime.datetime):
     for amount_WBTC in AmountCategory.WBTC:
         pass
 
-    scheduled_tasks = []
     for task in tasks:
-        scheduled_tasks.append(task)
-        scheduled_tasks.append(asyncio.sleep(1))
-
-    await asyncio.gather(*scheduled_tasks)
+        await task
+        await asyncio.sleep(1)
 
 
 async def update_data(
@@ -46,9 +43,10 @@ async def update_data(
     amount_stable_coin: float,
 ):
     to_add = await get_1inch_price(
+        chain=chain,
         token_in=token_in,
         token_out=token_out,
-        amount_in=amount_stable_coin,
+        amount_in=int(amount_stable_coin * 10**token_in.decimals),
     )
     try:
         amountOut = to_add["dstAmount"]
@@ -60,7 +58,7 @@ async def update_data(
             "toToken": token_out.symbol,
             "gasCost": "",
             "amountIn": amount_stable_coin,
-            "amountOut": amountOut,
+            "amountOut": int(amountOut / 10**token_out.decimals),
         }
         data.append(elem)
     except KeyError:
@@ -68,12 +66,13 @@ async def update_data(
 
 
 async def get_1inch_price(
+    chain: Chain,
     token_in: Mainnet,
     token_out: Mainnet,
     amount_in: float,
     method: str = "get",
-    api_url: str = "https://api.1inch.dev/swap/v6.0/1/quote",
 ) -> dict:
+    api_url = f"https://api.1inch.dev/swap/v6.0/{chain.ID}/quote"
     headers = {"Authorization": f"Bearer {ID1inch}"}
     body = {}
     params = {
@@ -85,7 +84,14 @@ async def get_1inch_price(
     async with aiohttp.ClientSession() as session:
         try:
             async with session.get(api_url, headers=headers, params=params) as response:
-                print(response)
-                return await response.json(content_type=None)
+                if response.status != 200:
+                    print(
+                        f"""Error {response.status} while fetching {api_url}
+The parameters were: {params}
+The response was: {await response.text()}
+"""
+                    )
+                    return {}
+                return await response.json()
         except asyncio.TimeoutError:
             print(f"Timeout error occurred while fetching {api_url}")
