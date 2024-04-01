@@ -49,7 +49,7 @@ async def update_data(
         amount_in=int(amount_stable_coin * 10**token_in.decimals),
     )
     try:
-        amountOut = int(float(to_add["dstAmount"]) / 10**token_out.decimals)
+        amountOut = float(to_add["dstAmount"]) / 10**token_out.decimals
         elem = {
             "timestamp": timestamp,
             "platform": "1inch",
