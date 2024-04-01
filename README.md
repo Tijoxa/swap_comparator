@@ -12,12 +12,10 @@ Build a table that could be requested from the Jumper team that has 7 columns:
 
 - **Pairs:**
 
-|             | Stablecoin                            | Main Tokens                  | Alternative Tokens |     |
-| ----------- | ------------------------------------- | ---------------------------- | ------------------ | --- |
-| Ethereum    | USDC - USDT                           |
-| USDC - DAI  | WETH-WBTC , WETH - USDC, WETH - USDT, | WETH - WSTETH ,  WETH - MKR, |
-| WETH - PEPE |                                       |
-| Arbitrum    | USDC - USDT                           | WETH - USDC, WETH - USDT,    | WETH - ARB         |     |
+|             | Pairs                            |
+| ----------- | ------------------------------------- |
+| Ethereum    | USDC - USDT, USDC - DAI, WETH-WBTC , WETH - USDC, WETH - USDT, WETH - WSTETH ,  WETH - MKR, WETH - PEPE |                         |                                   |
+| Arbitrum    | USDC - USDT, WETH - USDC, WETH - USDT, WETH - ARB         |   
 
 
 - **Timestamp frequency:**
@@ -26,7 +24,7 @@ Hour
 
 - **Amount category:**
 
-|      | Stablecoin                            | WETH                                    | WBTC                             |
+|      | Stablecoin (USDC-DAI-USDT)                           | WETH                                    | WBTC                             |
 | ---- | ------------------------------------- | --------------------------------------- | -------------------------------- |
 | Size | 100 / 1000 / 10000 / 100000 / 1000000 | 0.1 / 0.1 / 1 / 10 / 100 / 1000 / 10000 | 0.01 / 0.1 / 1 / 10 / 100 / 1000 |
 
