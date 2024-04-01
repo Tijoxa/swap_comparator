@@ -2,7 +2,7 @@ import aiohttp
 import asyncio
 import datetime
 
-from swap_comparator.utils.constant import ID1inch, AmountCategory, Mainnet, ArbiscanMainnet, EtherscanMainnet, ChainList, Chain
+from swap_comparator.utils.constant import ID1inch, RPS1inch, AmountCategory, Mainnet, ArbiscanMainnet, EtherscanMainnet, ChainList, Chain
 
 
 async def run_1inch(data: list[dict], timestamp: datetime.datetime):
@@ -31,7 +31,7 @@ async def run_1inch(data: list[dict], timestamp: datetime.datetime):
 
     for task in tasks:
         await task
-        await asyncio.sleep(1)
+        await asyncio.sleep(RPS1inch)
 
 
 async def update_data(
@@ -49,7 +49,7 @@ async def update_data(
         amount_in=int(amount_stable_coin * 10**token_in.decimals),
     )
     try:
-        amountOut = to_add["dstAmount"]
+        amountOut = int(float(to_add["dstAmount"]) / 10**token_out.decimals)
         elem = {
             "timestamp": timestamp,
             "platform": "1inch",
@@ -58,7 +58,7 @@ async def update_data(
             "toToken": token_out.symbol,
             "gasCost": "",
             "amountIn": amount_stable_coin,
-            "amountOut": int(amountOut / 10**token_out.decimals),
+            "amountOut": amountOut,
         }
         data.append(elem)
     except KeyError:
