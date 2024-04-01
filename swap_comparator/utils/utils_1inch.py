@@ -2,28 +2,32 @@ import aiohttp
 import asyncio
 import datetime
 
-from swap_comparator.utils.constant import ID1inch, ARBISCAN_MAINNET_ADDRESS, AmountCategory, MainnetAddress
+from swap_comparator.utils.constant import ID1inch, AmountCategory, Mainnet, ArbiscanMainnet, EtherscanMainnet, ChainList, Chain
 
 
 async def run_1inch(data: list[dict], timestamp: datetime.datetime):
     tasks = []
 
     for amount_stable_coin in AmountCategory.stable_coin:
-        tasks.append(
-            update_data(
-                data,
-                timestamp,
-                ARBISCAN_MAINNET_ADDRESS["USDC"],
-                ARBISCAN_MAINNET_ADDRESS["USDT"],
-                amount_stable_coin,
-            )
-        )
+        tasks.append(update_data(data, timestamp, ChainList.ARBITRUM, ArbiscanMainnet.USDC, ArbiscanMainnet.USDT, amount_stable_coin))
+
+        tasks.append(update_data(data, timestamp, ChainList.ETH, EtherscanMainnet.USDC, EtherscanMainnet.USDT, amount_stable_coin))
+        tasks.append(update_data(data, timestamp, ChainList.ETH, EtherscanMainnet.USDC, EtherscanMainnet.DAI, amount_stable_coin))
 
     for amount_WETH in AmountCategory.WETH:
-        tasks.append(update_data(data, timestamp, amount_WETH))
+        tasks.append(update_data(data, timestamp, ChainList.ARBITRUM, ArbiscanMainnet.WETH, ArbiscanMainnet.USDC, amount_WETH))
+        tasks.append(update_data(data, timestamp, ChainList.ARBITRUM, ArbiscanMainnet.WETH, ArbiscanMainnet.USDT, amount_WETH))
+        tasks.append(update_data(data, timestamp, ChainList.ARBITRUM, ArbiscanMainnet.WETH, ArbiscanMainnet.ARB, amount_WETH))
+
+        tasks.append(update_data(data, timestamp, ChainList.ETH, EtherscanMainnet.WETH, EtherscanMainnet.WBTC, amount_WETH))
+        tasks.append(update_data(data, timestamp, ChainList.ETH, EtherscanMainnet.WETH, EtherscanMainnet.USDC, amount_WETH))
+        tasks.append(update_data(data, timestamp, ChainList.ETH, EtherscanMainnet.WETH, EtherscanMainnet.USDT, amount_WETH))
+        tasks.append(update_data(data, timestamp, ChainList.ETH, EtherscanMainnet.WETH, EtherscanMainnet.WSTETH, amount_WETH))
+        tasks.append(update_data(data, timestamp, ChainList.ETH, EtherscanMainnet.WETH, EtherscanMainnet.MKR, amount_WETH))
+        tasks.append(update_data(data, timestamp, ChainList.ETH, EtherscanMainnet.WETH, EtherscanMainnet.PEPE, amount_WETH))
 
     for amount_WBTC in AmountCategory.WBTC:
-        tasks.append(update_data(data, timestamp, amount_WBTC))
+        pass
 
     await asyncio.gather(*tasks)
 
@@ -31,8 +35,9 @@ async def run_1inch(data: list[dict], timestamp: datetime.datetime):
 async def update_data(
     data: list[dict],
     timestamp: datetime.datetime,
-    token_in: MainnetAddress,
-    token_out: MainnetAddress,
+    chain: Chain,
+    token_in: Mainnet,
+    token_out: Mainnet,
     amount_stable_coin: float,
 ):
     to_add = await get_1inch_price(
@@ -43,19 +48,19 @@ async def update_data(
     elem = {
         "timestamp": timestamp,
         "platform": "1inch",
-        "fromToken": token_in,  # TODO: serialize
-        "toToken": token_out,  # TODO: serialize
-        "chainId": "",
+        "chainId": chain.ID,
+        "fromToken": token_in.symbol,
+        "toToken": token_out.symbol,
         "gasCost": "",
         "amountIn": amount_stable_coin,
-        "amountOut": to_add["toTokenAmount"],
+        "amountOut": to_add,
     }
     data.append(elem)
 
 
 async def get_1inch_price(
-    token_in: str,
-    token_out: str,
+    token_in: Mainnet,
+    token_out: Mainnet,
     amount_in: float,
     method: str = "get",
     api_url: str = "https://api.1inch.dev/swap/v6.0/1/quote",
@@ -63,10 +68,11 @@ async def get_1inch_price(
     headers = {"Authorization": f"Bearer {ID1inch}"}
     body = {}
     params = {
-        "src": token_in,
-        "dst": token_out,
+        "src": token_in.token_address,
+        "dst": token_out.token_address,
         "amount": amount_in,
     }
+    return None
 
     async with aiohttp.ClientSession() as session:
         try:

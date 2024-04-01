@@ -6,24 +6,17 @@ import datetime
 from swap_comparator.utils.utils_1inch import run_1inch
 
 
-def write_on_timestamp(path: str, data: list[dict], timestamp: datetime.datetime):
+def write_on_timestamp(path: str, data: list[dict]):
     file_exists = os.path.isfile(path)
 
     with open(path, "a") as csvfile:
-        # "timestamp",
-        # "chain",
-        # "token_in",
-        # "token_out",
-        # "pair_metadata",
-        # "platform",
-        # "amount_in",
-        # "amount_out",
         headers = [
             "timestamp",
+            "platform",
+            "chainId",
             "fromToken",
             "toToken",
-            "chainId",
-            "gasCostAmount",
+            "gasCost",
             "amountIn",
             "amountOut",
         ]
@@ -49,7 +42,7 @@ async def run_each_hour():
 
 
 async def main():
-    run_each_hour()
+    await run_each_hour()
 
 
 if __name__ == "__main__":
