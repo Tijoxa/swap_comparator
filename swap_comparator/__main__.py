@@ -40,7 +40,7 @@ async def run_each_hour():
 
     await asyncio.gather(
         run_1inch(data, datetime_up_to_hour),
-        # run_odos(data, datetime_up_to_hour),
+        run_odos(data, datetime_up_to_hour),
         run_0x(data, datetime_up_to_hour),
         run_lifi(data, datetime_up_to_hour),
         run_paraswap(data, datetime_up_to_hour),

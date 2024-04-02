@@ -49,7 +49,7 @@ async def update_data(
         amount_in=int(amount_in_unit * 10**token_in.decimals),
     )
     try:
-        amount_out_unit = float(to_add["outAmounts"]) / 10**token_out.decimals
+        amount_out_unit = float(to_add["outAmounts"][0]) / 10**token_out.decimals
         elem = {
             "timestamp": timestamp,
             "platform": "Odos",
@@ -96,7 +96,7 @@ async def get_odos_price(
 
     async with aiohttp.ClientSession() as session:
         try:
-            async with session.get(quote_url, headers={"Content-Type": "application/json"}, json=quote_request_body) as response:
+            async with session.post(quote_url, headers={"Content-Type": "application/json"}, json=quote_request_body) as response:
                 if response.status != 200:
                     print(
                         f"""Error {response.status} while fetching {quote_url}
