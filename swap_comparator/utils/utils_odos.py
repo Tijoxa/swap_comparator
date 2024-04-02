@@ -69,7 +69,7 @@ async def get_odos_price(
     chain: Chain,
     token_in: Mainnet,
     token_out: Mainnet,
-    amount_in: float,
+    amount_in: int,
 ) -> dict:
     quote_url = "https://api.odos.xyz/sor/quote/v2"
 
@@ -78,7 +78,7 @@ async def get_odos_price(
         "inputTokens": [
             {
                 "tokenAddress": token_in.token_address,
-                "amount": f"{amount_in:.0f}",
+                "amount": amount_in,
             }
         ],
         "outputTokens": [
