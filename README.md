@@ -3,6 +3,7 @@
 ## Setup
 <pre>pip install -r requirements.txt</pre>
 Create `./data/` folder in the root.
+Edit the `./example.env` into `./.env` and fill the different fields.
 
 ## Run
 <pre>python -m swap_comparator</pre>
