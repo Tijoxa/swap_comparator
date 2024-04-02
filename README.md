@@ -1,4 +1,22 @@
-## swap_comparator
+# swap_comparator
+
+## Setup
+<pre>pip install -r requirements.txt</pre>
+Create `./data/` folder in the root.
+
+## Run
+<pre>python -m swap_comparator</pre>
+
+## Test
+<pre>python -m pytest</pre>
+
+## Return value
+A `./data/timestamp.csv` is created / completed after a few minutes.
+
+Some errors can happen:
+- ParaSwap: ESTIMATED_LOSS_GREATER_THAN_MAX_IMPACT
+- LiFi: No available quotes for the requested transfer
+- 0xSwap: Arbitrum: INSUFFICIENT_ASSET_LIQUIDITY (so I removed the tasks in `./swap_comparator/utils/utils_0x.py`)
 
 # Purpose
 
@@ -12,10 +30,10 @@ Build a table that could be requested from the Jumper team that has 7 columns:
 
 - **Pairs:**
 
-|             | Pairs                            |
-| ----------- | ------------------------------------- |
-| Ethereum    | USDC - USDT, USDC - DAI, WETH-WBTC , WETH - USDC, WETH - USDT, WETH - WSTETH ,  WETH - MKR, WETH - PEPE |                         |                                   |
-| Arbitrum    | USDC - USDT, WETH - USDC, WETH - USDT, WETH - ARB         |   
+|          | Pairs                                                                                                   |
+| -------- | ------------------------------------------------------------------------------------------------------- |
+| Ethereum | USDC - USDT, USDC - DAI, WETH-WBTC , WETH - USDC, WETH - USDT, WETH - WSTETH ,  WETH - MKR, WETH - PEPE |  |  |
+| Arbitrum | USDC - USDT, WETH - USDC, WETH - USDT, WETH - ARB                                                       |
 
 
 - **Timestamp frequency:**
@@ -24,7 +42,7 @@ Hour
 
 - **Amount category:**
 
-|      | Stablecoin (USDC-DAI-USDT)                           | WETH                                    | WBTC                             |
+|      | Stablecoin (USDC-DAI-USDT)            | WETH                                    | WBTC                             |
 | ---- | ------------------------------------- | --------------------------------------- | -------------------------------- |
 | Size | 100 / 1000 / 10000 / 100000 / 1000000 | 0.1 / 0.1 / 1 / 10 / 100 / 1000 / 10000 | 0.01 / 0.1 / 1 / 10 / 100 / 1000 |
 
