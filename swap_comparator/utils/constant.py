@@ -5,10 +5,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 ID1inch = os.getenv("ID1inch")
-RPS1inch = int(os.getenv("RPS1inch"))
-RPSOdos = int(os.getenv("RPSOdos"))
+RPS1inch = float(os.getenv("RPS1inch"))
+
+RPSOdos = float(os.getenv("RPSOdos"))
+
 ID0xSwap = os.getenv("ID0xSwap")
-RPS0xSwap = int(os.getenv("RPS0xSwap"))
+RPS0xSwap = float(os.getenv("RPS0xSwap"))
+
+RPSLiFi = float(os.getenv("RPSLiFi"))
+from_address_LiFi = os.getenv("FromAddressLiFi")
 
 
 @dataclass
