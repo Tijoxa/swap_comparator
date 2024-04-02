@@ -86,6 +86,9 @@ async def get_paraswap_price(
     async with aiohttp.ClientSession() as session:
         try:
             async with session.get(api_url, headers=headers, params=params) as response:
+                if response.status == 400:
+                    print(f"Ignoring error 400 while fetching paraswap price using {params=}")
+                    return await response.json()
                 if response.status != 200:
                     print(
                         f"""Error {response.status} while fetching {api_url}
