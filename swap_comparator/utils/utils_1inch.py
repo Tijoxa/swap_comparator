@@ -31,7 +31,7 @@ async def run_1inch(data: list[dict], timestamp: datetime.datetime):
 
     for task in tasks:
         await task
-        await asyncio.sleep(RPS1inch)
+        await asyncio.sleep(1 / RPS1inch)
 
 
 async def update_data(
