@@ -49,7 +49,7 @@ async def update_data(
         amount_in=int(amount_in_unit * 10**token_in.decimals),
     )
     try:
-        amountOut = float(to_add["outAmounts"]) / 10**token_out.decimals
+        amount_out_unit = float(to_add["outAmounts"]) / 10**token_out.decimals
         elem = {
             "timestamp": timestamp,
             "platform": "Odos",
@@ -58,7 +58,7 @@ async def update_data(
             "toToken": token_out.symbol,
             "gasCost": "",
             "amountIn": amount_in_unit,
-            "amountOut": amountOut,
+            "amountOut": amount_out_unit,
         }
         data.append(elem)
     except KeyError:
