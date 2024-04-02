@@ -4,6 +4,7 @@ import os
 import datetime
 
 from swap_comparator.utils.utils_1inch import run_1inch
+from swap_comparator.utils.utils_odos import run_odos
 
 
 def write_on_timestamp(path: str, data: list[dict]):
@@ -36,6 +37,7 @@ async def run_each_hour():
 
     await asyncio.gather(
         run_1inch(data, datetime_up_to_hour),
+        # run_odos(data, datetime_up_to_hour),
     )
 
     write_on_timestamp(os.path.join("data", "timestamp.csv"), data)

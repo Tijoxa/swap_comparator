@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 ID1inch = os.getenv("ID1inch")
 RPS1inch = int(os.getenv("RPS1inch"))
+RPSOdos = int(os.getenv("RPSOdos"))
 
 
 @dataclass
