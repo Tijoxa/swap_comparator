@@ -69,12 +69,11 @@ async def get_1inch_price(
     chain: Chain,
     token_in: Mainnet,
     token_out: Mainnet,
-    amount_in: float,
+    amount_in: int,
     method: str = "get",
 ) -> dict:
     api_url = f"https://api.1inch.dev/swap/v6.0/{chain.ID}/quote"
     headers = {"Authorization": f"Bearer {ID1inch}"}
-    body = {}
     params = {
         "src": token_in.token_address,
         "dst": token_out.token_address,

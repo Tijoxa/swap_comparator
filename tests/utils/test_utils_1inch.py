@@ -4,7 +4,6 @@ from swap_comparator.utils.constant import ID1inch, ChainList, ArbiscanMainnet
 
 
 def test_1inch_API():
-    method = "get"
     api_url = f"https://api.1inch.dev/swap/v6.0/{ChainList.ARBITRUM.ID}/quote"
     requestOptions = {
         "headers": {"Authorization": f"Bearer {ID1inch}"},
@@ -17,7 +16,6 @@ def test_1inch_API():
     }
 
     headers = requestOptions.get("headers", {})
-    body = requestOptions.get("body", {})
     params = requestOptions.get("params", {})
 
     response = requests.get(api_url, headers=headers, params=params)
