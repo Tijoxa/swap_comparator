@@ -11,7 +11,7 @@ def test_Odos_API():
         "inputTokens": [
             {
                 "tokenAddress": EtherscanMainnet.WETH.token_address,
-                "amount": f"{1 * 10**EtherscanMainnet.WETH.decimals:.0f}",
+                "amount": str(1 * 10**EtherscanMainnet.WETH.decimals),
             }
         ],
         "outputTokens": [

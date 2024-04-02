@@ -78,7 +78,7 @@ async def get_odos_price(
         "inputTokens": [
             {
                 "tokenAddress": token_in.token_address,
-                "amount": amount_in,
+                "amount": str(amount_in),
             }
         ],
         "outputTokens": [
