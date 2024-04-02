@@ -40,13 +40,13 @@ async def update_data(
     chain: Chain,
     token_in: Mainnet,
     token_out: Mainnet,
-    amount_stable_coin: float,
+    amount_in_unit: float,
 ):
     to_add = await get_1inch_price(
         chain=chain,
         token_in=token_in,
         token_out=token_out,
-        amount_in=int(amount_stable_coin * 10**token_in.decimals),
+        amount_in=int(amount_in_unit * 10**token_in.decimals),
     )
     try:
         amountOut = float(to_add["dstAmount"]) / 10**token_out.decimals
@@ -57,7 +57,7 @@ async def update_data(
             "fromToken": token_in.symbol,
             "toToken": token_out.symbol,
             "gasCost": "",
-            "amountIn": amount_stable_coin,
+            "amountIn": amount_in_unit,
             "amountOut": amountOut,
         }
         data.append(elem)
