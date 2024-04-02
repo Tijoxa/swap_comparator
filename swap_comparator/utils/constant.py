@@ -15,6 +15,8 @@ RPS0xSwap = float(os.getenv("RPS0xSwap"))
 RPSLiFi = float(os.getenv("RPSLiFi"))
 from_address_LiFi = os.getenv("FromAddressLiFi")
 
+RPSParaSwap = float(os.getenv("RPSParaSwap"))
+
 
 @dataclass
 class Mainnet:

@@ -7,6 +7,7 @@ from swap_comparator.utils.utils_1inch import run_1inch
 from swap_comparator.utils.utils_odos import run_odos
 from swap_comparator.utils.utils_0x import run_0x
 from swap_comparator.utils.utils_lifi import run_lifi
+from swap_comparator.utils.utils_paraswap import run_paraswap
 
 
 def write_on_timestamp(path: str, data: list[dict]):
@@ -42,6 +43,7 @@ async def run_each_hour():
         # run_odos(data, datetime_up_to_hour),
         run_0x(data, datetime_up_to_hour),
         run_lifi(data, datetime_up_to_hour),
+        run_paraswap(data, datetime_up_to_hour),
     )
 
     write_on_timestamp(os.path.join("data", "timestamp.csv"), data)
