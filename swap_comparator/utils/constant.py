@@ -7,6 +7,8 @@ load_dotenv()
 ID1inch = os.getenv("ID1inch")
 RPS1inch = int(os.getenv("RPS1inch"))
 RPSOdos = int(os.getenv("RPSOdos"))
+ID0xSwap = os.getenv("ID0xSwap")
+RPS0xSwap = int(os.getenv("RPS0xSwap"))
 
 
 @dataclass
