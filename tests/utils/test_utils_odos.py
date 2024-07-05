@@ -1,8 +1,9 @@
+import pytest
 import requests
-
 from swap_comparator.constant import ChainList, EtherscanMainnet
 
 
+@pytest.mark.api
 def test_Odos_API():
     quote_url = "https://api.odos.xyz/sor/quote/v2"
 

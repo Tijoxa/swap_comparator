@@ -1,8 +1,9 @@
+import pytest
 import requests
-
 from swap_comparator.constant import from_address_LiFi, ChainList, EtherscanMainnet
 
 
+@pytest.mark.api
 def test_LiFi_API():
     api_url = "https://li.quest/v1/quote"
     headers = {"accept": "application/json"}

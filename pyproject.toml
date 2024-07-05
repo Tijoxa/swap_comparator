@@ -10,34 +10,11 @@ readme = "README.md"
 requires-python = ">=3.11"
 
 [project.optional-dependencies]
-dev = ["pytest", "pytest-env"]
+dev = ["pytest", "pytest-explicit"]
 
 [tool.pytest.ini_options]
-addopts = [
-    "-rEfX",
-    "--tb=native",
-    "--capture=sys",
-    "-p",
-    "no:warnings",
-    "-p",
-    "no:pytest-shard",
-    "--assert=plain",
-]
-
-[tool.pytest.ini_options.env]
-RPSOdos = "1"
-
-ID1inch = "1"
-RPS1inch = "1"
-
-ID0xSwap = "1"
-RPS0xSwap = "1"
-
-RPSLiFi = "1"
-FromAddressLiFi = "1"
-
-RPSParaSwap = "1"
-
+markers = ["api: run API tests"]
+explicit-only = ["api"]
 
 [tool.ruff]
 line-length = 149
