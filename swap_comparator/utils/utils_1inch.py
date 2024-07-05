@@ -2,7 +2,7 @@ import aiohttp
 import asyncio
 import datetime
 
-from swap_comparator.utils.constant import ID1inch, RPS1inch, AmountCategory, Mainnet, ArbiscanMainnet, EtherscanMainnet, ChainList, Chain
+from swap_comparator.constant import ID1inch, RPS1inch, AmountCategory, Mainnet, ArbiscanMainnet, EtherscanMainnet, ChainList, Chain
 
 
 async def run_1inch(data: list[dict], timestamp: datetime.datetime):

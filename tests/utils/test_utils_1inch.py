@@ -1,6 +1,6 @@
 import requests
 
-from swap_comparator.utils.constant import ID1inch, ChainList, ArbiscanMainnet
+from swap_comparator.constant import ID1inch, ChainList, ArbiscanMainnet
 
 
 def test_1inch_API():

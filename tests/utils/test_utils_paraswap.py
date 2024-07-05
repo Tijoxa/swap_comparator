@@ -1,6 +1,6 @@
 import requests
 
-from swap_comparator.utils.constant import ChainList, EtherscanMainnet
+from swap_comparator.constant import ChainList, EtherscanMainnet
 
 
 def test_ParaSwap_API():

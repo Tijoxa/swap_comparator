@@ -1,6 +1,6 @@
 import requests
 
-from swap_comparator.utils.constant import from_address_LiFi, ChainList, EtherscanMainnet
+from swap_comparator.constant import from_address_LiFi, ChainList, EtherscanMainnet
 
 
 def test_LiFi_API():

@@ -1,6 +1,6 @@
 import requests
 
-from swap_comparator.utils.constant import ID0xSwap, EtherscanMainnet
+from swap_comparator.constant import ID0xSwap, EtherscanMainnet
 
 
 # TODO: test on Arbitrum

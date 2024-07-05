@@ -2,7 +2,7 @@ import aiohttp
 import asyncio
 import datetime
 
-from swap_comparator.utils.constant import RPSParaSwap, AmountCategory, Mainnet, ArbiscanMainnet, EtherscanMainnet, ChainList, Chain
+from swap_comparator.constant import RPSParaSwap, AmountCategory, Mainnet, ArbiscanMainnet, EtherscanMainnet, ChainList, Chain
 
 
 async def run_paraswap(data: list[dict], timestamp: datetime.datetime):
