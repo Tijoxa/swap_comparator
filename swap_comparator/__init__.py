@@ -1,9 +1,9 @@
-from swap_comparator.utils import run_1inch, run_odos, run_0x, run_lifi, run_paraswap
-
 import asyncio
 import csv
-import os
 import datetime
+import os
+
+from swap_comparator.utils import run_1inch, run_odos, run_0x, run_lifi, run_paraswap
 
 
 def write_on_timestamp(path: str, data: list[dict]):
