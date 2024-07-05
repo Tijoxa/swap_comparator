@@ -1,8 +1,9 @@
+import pytest
 import requests
+from swap_comparator.constant import ID1inch, ChainList, ArbiscanMainnet
 
-from swap_comparator.utils.constant import ID1inch, ChainList, ArbiscanMainnet
 
-
+@pytest.mark.api
 def test_1inch_API():
     api_url = f"https://api.1inch.dev/swap/v6.0/{ChainList.ARBITRUM.ID}/quote"
     requestOptions = {

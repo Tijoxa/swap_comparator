@@ -2,7 +2,7 @@ import aiohttp
 import asyncio
 import datetime
 
-from swap_comparator.utils.constant import RPSOdos, AmountCategory, Mainnet, ArbiscanMainnet, EtherscanMainnet, ChainList, Chain
+from swap_comparator.constant import RPSOdos, AmountCategory, Mainnet, ArbiscanMainnet, EtherscanMainnet, ChainList, Chain
 
 
 async def run_odos(data: list[dict], timestamp: datetime.datetime):

@@ -1,8 +1,9 @@
+import pytest
 import requests
+from swap_comparator.constant import ChainList, EtherscanMainnet
 
-from swap_comparator.utils.constant import ChainList, EtherscanMainnet
 
-
+@pytest.mark.api
 def test_ParaSwap_API():
     api_url = "https://apiv5.paraswap.io/prices"
     headers = {"accept": "application/json"}

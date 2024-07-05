@@ -1,9 +1,10 @@
+import pytest
 import requests
-
-from swap_comparator.utils.constant import ID0xSwap, EtherscanMainnet
+from swap_comparator.constant import ID0xSwap, EtherscanMainnet
 
 
 # TODO: test on Arbitrum
+@pytest.mark.api
 def test_0x_API():
     api_url = "https://api.0x.org/swap/v1/quote"
     requestOptions = {

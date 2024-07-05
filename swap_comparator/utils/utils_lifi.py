@@ -2,7 +2,7 @@ import aiohttp
 import asyncio
 import datetime
 
-from swap_comparator.utils.constant import from_address_LiFi, RPSLiFi, AmountCategory, Mainnet, ArbiscanMainnet, EtherscanMainnet, ChainList, Chain
+from swap_comparator.constant import from_address_LiFi, RPSLiFi, AmountCategory, Mainnet, ArbiscanMainnet, EtherscanMainnet, ChainList, Chain
 
 
 async def run_lifi(data: list[dict], timestamp: datetime.datetime):
