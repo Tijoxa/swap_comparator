@@ -1,7 +1,9 @@
 import aiohttp
 import asyncio
 import datetime
+import logging
 
+import swap_comparator.log_config
 from swap_comparator.constant import RPSParaSwap, AmountCategory, Mainnet, ArbiscanMainnet, EtherscanMainnet, ChainList, Chain
 
 
@@ -62,7 +64,7 @@ async def update_data(
         }
         data.append(elem)
     except KeyError:
-        print(f"KeyError on response {to_add}")
+        logging.error(f"KeyError on response {to_add}")
 
 
 async def get_paraswap_price(
@@ -87,16 +89,15 @@ async def get_paraswap_price(
         try:
             async with session.get(api_url, headers=headers, params=params) as response:
                 if response.status == 400:
-                    print(f"Ignoring error 400 while fetching paraswap price using {params=}")
+                    logging.warning(f"Ignoring error 400 while fetching paraswap price using {params=}")
                     return await response.json()
                 if response.status != 200:
-                    print(
+                    logging.error(
                         f"""Error {response.status} while fetching {api_url}
 The parameters were: {params}
-The response was: {await response.text()}
-"""
+The response was: {await response.text()}"""
                     )
                     return {}
                 return await response.json()
         except asyncio.TimeoutError:
-            print(f"Timeout error occurred while fetching {api_url}")
+            logging.error(f"Timeout error occurred while fetching {api_url}")

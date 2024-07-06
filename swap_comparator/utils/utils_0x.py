@@ -1,7 +1,9 @@
 import aiohttp
 import asyncio
 import datetime
+import logging
 
+import swap_comparator.log_config
 from swap_comparator.constant import ID0xSwap, RPS0xSwap, AmountCategory, Mainnet, ArbiscanMainnet, EtherscanMainnet, ChainList, Chain
 
 
@@ -55,7 +57,7 @@ async def update_data(
         }
         data.append(elem)
     except KeyError:
-        print(f"KeyError on response {to_add}")
+        logging.error(f"KeyError on response {to_add}")
 
 
 async def get_0x_price(
@@ -81,13 +83,10 @@ async def get_0x_price(
         try:
             async with session.get(api_url, headers=headers, params=params) as response:
                 if response.status != 200:
-                    print(
-                        f"""Error {response.status} while fetching {api_url}
+                    logging.error(f"""Error {response.status} while fetching {api_url}
 The parameters were: {params}
-The response was: {await response.text()}
-"""
-                    )
+The response was: {await response.text()}""")
                     return {}
                 return await response.json()
         except asyncio.TimeoutError:
-            print(f"Timeout error occurred while fetching {api_url}")
+            logging.error(f"Timeout error occurred while fetching {api_url}")
