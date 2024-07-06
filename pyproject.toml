@@ -5,7 +5,7 @@ description = "A Python package to retreive data from several APIs."
 authors = [
     { name = "Tijoxa", email = "92037181+Tijoxa@users.noreply.github.com" },
 ]
-dependencies = ["aiohttp", "python-dotenv", "requests"]
+dependencies = ["aiohttp", "colorlog", "python-dotenv", "requests"]
 readme = "README.md"
 requires-python = ">=3.11"
 
