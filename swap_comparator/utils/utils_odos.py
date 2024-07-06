@@ -1,7 +1,9 @@
 import aiohttp
 import asyncio
 import datetime
+import logging
 
+import swap_comparator.log_config
 from swap_comparator.constant import RPSOdos, AmountCategory, Mainnet, ArbiscanMainnet, EtherscanMainnet, ChainList, Chain
 
 
@@ -62,7 +64,7 @@ async def update_data(
         }
         data.append(elem)
     except KeyError:
-        print(f"KeyError on response {to_add}")
+        logging.error(f"KeyError on response {to_add}")
 
 
 async def get_odos_price(
@@ -98,13 +100,12 @@ async def get_odos_price(
         try:
             async with session.post(quote_url, headers={"Content-Type": "application/json"}, json=quote_request_body) as response:
                 if response.status != 200:
-                    print(
+                    logging.error(
                         f"""Error {response.status} while fetching {quote_url}
 The parameters were: {quote_request_body}
-The response was: {await response.text()}
-"""
+The response was: {await response.text()}"""
                     )
                     return {}
                 return await response.json()
         except asyncio.TimeoutError:
-            print(f"Timeout error occurred while fetching {quote_url}")
+            logging.error(f"Timeout error occurred while fetching {quote_url}")

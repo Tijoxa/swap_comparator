@@ -1,8 +1,10 @@
 import asyncio
 import csv
 import datetime
+import logging
 import os
 
+import swap_comparator.log_config
 from swap_comparator.utils import run_1inch, run_odos, run_0x, run_lifi, run_paraswap
 
 
@@ -32,8 +34,9 @@ def write_on_timestamp(path: str, data: list[dict]):
 async def run_each_hour():
     current_datetime = datetime.datetime.now()
     datetime_up_to_hour = current_datetime.replace(minute=0, second=0, microsecond=0)
-    data = []
+    logging.info(f"Running for {datetime_up_to_hour}…")
 
+    data = []
     await asyncio.gather(
         run_1inch(data, datetime_up_to_hour),
         run_odos(data, datetime_up_to_hour),
