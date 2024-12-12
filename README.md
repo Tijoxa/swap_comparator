@@ -4,6 +4,16 @@
 <pre>pip install -r requirements.lock</pre>
 Edit the `./example.env` into `./.env` and fill the different fields.
 
+## Install as a library
+<pre>pip install .</pre>
+
+```Python
+import asyncio
+from swap_comparator import run_each_hour
+
+asyncio.run(run_each_hour())
+```
+
 ## Run
 <pre>python -m swap_comparator</pre>
 
